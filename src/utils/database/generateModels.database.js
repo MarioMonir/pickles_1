@@ -13,6 +13,7 @@ sequelize-auto  -o "./models" -h localhost -d center_administration -u root -x m
 
 const command = `sequelize-auto  -o "./models" -h ${process.env.DB_HOST} -d ${process.env.DB_NAME} -u ${process.env.DB_USER} -x  ${process.env.DB_PASSWORD} -p 3306 --e ${process.env.DB_DIALECT} -l esmd`;
 
+
 exec(command, (error, stdout, stderr) => {
   if (error) {
     console.log(`error: ${error.message}`);
@@ -24,6 +25,8 @@ exec(command, (error, stdout, stderr) => {
   }
   console.log(`stdout: ${stdout}`);
 });
+
+// ==========================================================
 
 /**
  *   TODO :

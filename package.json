@@ -7,7 +7,7 @@
     "dev": "nodemon --exec babel-node ./bin/www.js",
     "create-database": "node ./src/utils/database/create.database.js",
     "migrate-database": "node ./src/utils/database/migrate.database.js",
-    "generate-models": "node ./src/utils/database/generateModels.database.js"
+    "generateModles": "node ./src/utils/database/generateModels.database.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -23,6 +23,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
-    "@babel/preset-env": "^7.16.11"
+    "@babel/preset-env": "^7.16.11",
+    "sequelize-auto": "^0.8.5"
   }
 }

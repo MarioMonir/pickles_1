@@ -1,16 +1,15 @@
 -- Host: localhost
 -- Generation Time: Feb 27, 2022 at 09:40 AM
 -- Server version: 10.4.22-MariaDB
+--
+-- --------------------------------------------------------
+--
+START TRANSACTION;
 
 --
 -- --------------------------------------------------------
 --
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
---
+use pickels --
 -- Database: `pickels`
 --
 -- --------------------------------------------------------
@@ -18,6 +17,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `users`
 --
 DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(191) COLLATE utf8_unicode_ci NOT NULL,

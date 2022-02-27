@@ -1,4 +1,5 @@
-import sequelizecrud from "./src/orms/sequelize.orm.js";
-import crud from "./src/router/crud.router.js";
+import sequelizeOrm from "./orms/sequelize.orm.js";
+import crudRouter from "./router/crud.router.js";
 
-export default { crud, sequelizecrud };
+export const sequelizeCrud = sequelizeOrm;
+export const crud = crudRouter;

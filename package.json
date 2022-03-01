@@ -1,16 +1,16 @@
 {
   "name": "server",
-  "private": true,
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node ./bin/www.js",
+    "start": "yarn build && node dist/app.js",
+    "build": "babel ./bin/www.js -d dist",
     "dev": "nodemon --exec babel-node ./bin/www.js",
-    "create-database": "node ./src/utils/database/create.database.js",
-    "migrate-database": "node ./src/utils/database/migrate.database.js",
-    "generateModles": "node ./src/utils/database/generateModels.database.js"
+    "migrate-database": "npx prisma migrate dev",
+    "prisma-studio": "npx prisma studio"
   },
   "dependencies": {
+    "@prisma/client": "^3.10.0",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -21,13 +21,16 @@
     "morgan": "~1.9.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "nodemon": "^2.0.15",
-    "sequelize": "^6.17.0"
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.11",
-    "sequelize-auto": "^0.8.5"
+    "@babel/cli": "^7.17.6",
+    "prisma": "^3.10.0"
+  },
+  "engines": {
+    "node": ">=12.2.0"
   }
 }

@@ -26,7 +26,7 @@ import { parseQuery, setGetListHeaders } from "./controller.utils";
 const getList =
   (ormGetList, ormSearchList, filterOption) => async (req, res, next) => {
     try {
-      const { q, limit, offset, filter, order } = parseQuery(
+      const { q, limit, offset, filter, order, from, to } = parseQuery(
         req.query,
         filterOption
       );
@@ -35,14 +35,13 @@ const getList =
 
       // search query
       if (!q) {
-        const { rows, count } = await ormGetList({
+        const [count, rows] = await ormGetList({
           filter,
           limit,
           offset,
           order,
         });
-
-        setGetListHeaders(res, offset, count, rows.length);
+        setGetListHeaders(res, offset, count, rows?.length || 0);
         return res.status(200).json(rows);
       }
 
@@ -80,7 +79,7 @@ const create = (ormCreate) => async (req, res, next) => {
 
 const getOne = (ormGetOne) => async (req, res, next) => {
   try {
-    const record = await ormGetOne(req.params.id);
+    const record = await ormGetOne(Number(req.params.id));
 
     if (!record) return res.status(404).json({ error: "Record not found" });
 
@@ -94,7 +93,7 @@ const getOne = (ormGetOne) => async (req, res, next) => {
 
 const update = (ormUpdate) => async (req, res, next) => {
   try {
-    const record = await ormUpdate(req.params.id, req.body);
+    const record = await ormUpdate(Number(req.params.id), req.body);
     res.status(202).json(record);
   } catch (error) {
     next(error);
@@ -105,7 +104,7 @@ const update = (ormUpdate) => async (req, res, next) => {
 
 const destroy = (ormDestory) => async (req, res, next) => {
   try {
-    await ormDestory(req.params.id);
+    await ormDestory(Number(req.params.id));
     res.json({ id: req.params.id });
   } catch (error) {
     next(error);

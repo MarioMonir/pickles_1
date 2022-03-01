@@ -3,12 +3,13 @@ import cors from "cors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import { PrismaClient } from "@prisma/client";
+import { crud, prismaCrud } from "./src/utils/crud/express-crud-router";
+import errors from "./src/utils/error/errors.middleware.js";
 
 // ------------------------------------------------------
 
-import { crud, sequelizeCrud } from "./src/utils/crud/express-crud-router";
-import models from "./src/utils/database/init-models";
-import errors from "./src/utils/error/errors.middleware.js";
+const prisma = new PrismaClient();
 
 // ------------------------------------------------------
 
@@ -26,8 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // ------------------------------------------------------
 
-app.use(crud("//users", sequelizeCrud(models.users)));
-// app.use(crud("//users", sequelizeCrud(models["users"])));
+app.use(crud("//users", prismaCrud(prisma.user)));
 
 // ------------------------------------------------------
 
